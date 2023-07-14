@@ -39,11 +39,15 @@ io.on("connection", (socket) => {
         })
     })
 
+    socket.on('newConversation',({receiverId, newConv}) => {
+        const user = getUser(receiverId);
+        io.to(user.socketId).emit('getNewConversation',newConv)
+    })
+
     //when disconnect
     socket.on('disconnect', () => {
         console.log('a user disconnected!');
         removeUser(socket.id);
         io.emit("getUser", users);
-        console.log(users)
     })
 });
