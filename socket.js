@@ -1,5 +1,6 @@
 require('dotenv').config();
 const io = require("socket.io")(9000, {
+    transports: ["polling", "websocket", "webtransport"],
     cors: {
         origin: process.env.URL_REACT,
     }
